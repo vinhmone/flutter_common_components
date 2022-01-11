@@ -11,20 +11,35 @@ enum ImageType {
 class AvatarCircle extends StatelessWidget {
   final String? imageUrl;
   final File? file;
+  final double? widthFactor;
+  final double? heightFactor;
+  final Color borderColor;
+  final double borderWidth;
 
   const AvatarCircle({
     Key? key,
     this.imageUrl,
     this.file,
+    this.widthFactor,
+    this.heightFactor,
+    this.borderColor = Colors.black,
+    this.borderWidth = 0.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
+    return FractionallySizedBox(
+      widthFactor: widthFactor,
+      heightFactor: heightFactor,
       child: FittedBox(
         fit: BoxFit.contain,
-        child: _buildImage(),
+        child: CircleAvatar(
+          backgroundColor: borderColor,
+          child: Padding(
+            padding: EdgeInsets.all(borderWidth),
+            child: _buildImage(),
+          ),
+        ),
       ),
     );
   }

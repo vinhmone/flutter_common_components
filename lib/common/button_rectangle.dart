@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 
 class ButtonRectangle extends StatelessWidget {
   final String text;
+  final double fontSize;
+  final Color textColor;
+  final double border;
+  final double padding;
+  final double elevation;
+  final Color backgroundColor;
   final Function()? onClick;
 
   const ButtonRectangle({
     Key? key,
-    required this.text,
+    this.text = '',
+    this.fontSize = 16.0,
+    this.textColor = Colors.white,
+    this.border = 10.0,
+    this.padding = 16.0,
+    this.elevation = 1.0,
+    this.backgroundColor = const Color(0xffA838FF),
     this.onClick,
   }) : super(key: key);
 
@@ -15,21 +27,24 @@ class ButtonRectangle extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: onClick,
+        disabledColor: backgroundColor,
+        disabledTextColor: textColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(border),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(padding),
           child: Text(
             text,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
+            style: TextStyle(
+              color: textColor,
+              fontSize: fontSize,
             ),
           ),
         ),
-        color: const Color(0xffA838FF),
+        color: backgroundColor,
+        elevation: elevation,
       ),
     );
   }
