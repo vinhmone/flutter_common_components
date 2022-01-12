@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 class ChatCoverImage extends StatelessWidget {
   final ChatType chatType;
   final VisibilityStatus visibilityStatus;
-  final List<String>? imageUrl;
+  final List<String?>? imageUrl;
   final String? groupImage;
   final File? file;
-  final double? size;
+  final double size;
   final Color borderColor;
   final double borderWidth;
 
@@ -22,7 +22,7 @@ class ChatCoverImage extends StatelessWidget {
     this.imageUrl,
     this.groupImage,
     this.file,
-    this.size,
+    this.size = 100,
     this.borderColor = Colors.black,
     this.borderWidth = 0.0,
   }) : super(key: key);
@@ -30,11 +30,9 @@ class ChatCoverImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double statusImageSize = MediaQuery.of(context).size.width / 10;
-    if (size != null) {
-      if (size! > 0.0) {
-        // statusImageSize = sqrt(size!);
-        statusImageSize = size! / 5;
-      }
+    if (size > 0.0) {
+      // statusImageSize = sqrt(size!);
+      statusImageSize = size / 5;
     }
     return SizedBox(
       width: size,
@@ -59,13 +57,19 @@ class ChatCoverImage extends StatelessWidget {
   }
 
   List<Widget> _getCover(BuildContext context) {
+    String? singleUrl;
+    if (imageUrl != null) {
+      if (imageUrl!.isNotEmpty) {
+        singleUrl = imageUrl!.first;
+    }
+    }
     switch (chatType) {
       case ChatType.private:
-        return [_getPrivatePhoto(url: imageUrl?[0], file: file)];
+        return [_getPrivatePhoto(url: singleUrl, file: file)];
       case ChatType.group:
         return _getGroupCover(context);
       default:
-        return [_getSinglePhoto(url: imageUrl?[0], file: file)];
+        return [_getSinglePhoto(url: singleUrl, file: file)];
     }
   }
 
@@ -103,11 +107,9 @@ class ChatCoverImage extends StatelessWidget {
     String? url1;
     String? url2;
     double smallImageSize = MediaQuery.of(context).size.width / 1.5;
-    if (size != null) {
-      if (size! > 0) {
-        smallImageSize = size! / 1.5;
-        // smallImageSize = sqrt(size!) * 2.5;
-      }
+    if (size > 0) {
+      smallImageSize = size / 1.5;
+      // smallImageSize = sqrt(size!) * 2.5;
     }
     if (imageUrl != null) {
       if (imageUrl!.isNotEmpty) {

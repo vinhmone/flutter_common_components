@@ -1,4 +1,4 @@
-# baxter_common
+# common component
 
 A new Flutter project.
 
