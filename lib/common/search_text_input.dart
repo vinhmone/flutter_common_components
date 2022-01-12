@@ -6,7 +6,7 @@ class SearchTextInput extends StatelessWidget {
   final TextStyle hintStyle;
   final Color backgroundColor;
   final bool autoFocus;
-  final Function(String)? onClick;
+  final Function(String)? onSubmitted;
 
   const SearchTextInput({
     Key? key,
@@ -19,7 +19,7 @@ class SearchTextInput extends StatelessWidget {
     ),
     this.backgroundColor = const Color(0xFFC4C4C4),
     this.autoFocus = false,
-    this.onClick,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class SearchTextInput extends StatelessWidget {
         contentPadding: const EdgeInsets.only(left: 10),
       ),
       autofocus: autoFocus,
-      onSubmitted: onClick,
+      onSubmitted: onSubmitted,
     );
   }
 }

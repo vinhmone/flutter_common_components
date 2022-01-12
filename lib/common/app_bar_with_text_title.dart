@@ -3,34 +3,52 @@ import 'package:flutter/material.dart';
 class AppBarWithTextTitle extends AppBar {
   final String titleText;
   final TextStyle? textStyle;
-  final Widget? tailingButton;
+  final Widget? tailingWidget;
+  final Color? contentColor;
+  final bool showBackButton;
 
   AppBarWithTextTitle({
     Key? key,
-    this.tailingButton,
+    this.tailingWidget,
     this.titleText = '',
     this.textStyle,
+    this.contentColor = Colors.white,
+    this.showBackButton = true,
   }) : super(key: key);
 
   @override
   Widget? get flexibleSpace {
+    Color? textColor = Colors.white;
+    if (textStyle?.color != null) {
+      textColor = textStyle?.color;
+    } else if (contentColor != null) {
+      textColor = contentColor;
+    }
+    final _textStyle = textStyle?.copyWith(color: textColor);
     return SafeArea(
       child: Stack(
         children: [
-          BackButton(),
+          showBackButton
+              ? Align(
+                  alignment: Alignment.centerLeft,
+                  child: BackButton(
+                    color: contentColor,
+                  ),
+                )
+              : Container(),
           Align(
             alignment: Alignment.center,
             child: Text(
-              'Home',
+              titleText,
               textAlign: TextAlign.center,
-              style: textStyle,
+              style: _textStyle,
             ),
           ),
-          (tailingButton == null)
+          (tailingWidget == null)
               ? Container()
               : Align(
                   alignment: Alignment.centerRight,
-                  child: tailingButton!,
+                  child: tailingWidget!,
                 )
         ],
       ),
