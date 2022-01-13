@@ -5,7 +5,9 @@ class AppBarWithTextTitle extends AppBar {
   final TextStyle? textStyle;
   final Widget? tailingWidget;
   final Color? contentColor;
-  final bool showBackButton;
+  final bool? showBackButton;
+  final Color? background;
+  final double? appElevation;
 
   AppBarWithTextTitle({
     Key? key,
@@ -14,7 +16,25 @@ class AppBarWithTextTitle extends AppBar {
     this.textStyle,
     this.contentColor = Colors.white,
     this.showBackButton = true,
+    this.background = const Color(0xffA838FF),
+    this.appElevation,
   }) : super(key: key);
+
+  @override
+  Color? get backgroundColor => background;
+
+  @override
+  bool get automaticallyImplyLeading => false;
+
+  @override
+  double? get elevation => appElevation;
+
+  //
+  // @override
+  // Color? get shadowColor => Colors.transparent;
+  //
+  // @override
+  // Color? get foregroundColor => Colors.transparent;
 
   @override
   Widget? get flexibleSpace {
@@ -28,20 +48,24 @@ class AppBarWithTextTitle extends AppBar {
     return SafeArea(
       child: Stack(
         children: [
-          showBackButton
-              ? Align(
-                  alignment: Alignment.centerLeft,
+          (showBackButton == true)
+              ? Positioned(
+                  top: 0.0,
+                  left: 0.0,
+                  bottom: 0.0,
                   child: BackButton(
                     color: contentColor,
                   ),
                 )
               : Container(),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              titleText,
-              textAlign: TextAlign.center,
-              style: _textStyle,
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                titleText,
+                textAlign: TextAlign.center,
+                style: _textStyle,
+              ),
             ),
           ),
           (tailingWidget == null)

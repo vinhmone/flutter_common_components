@@ -15,7 +15,7 @@ class ButtonText extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        onPressed: () {},
+        onPressed: onClick,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(

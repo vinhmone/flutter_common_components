@@ -12,9 +12,12 @@ class TextFormBorderRectangle extends StatelessWidget {
   final TextInputType inputType;
   final bool autoFocus;
   final int? maxLine;
+  final int? maxLength;
   final TextEditingController? controller;
+  final double? titleAndFormSpace;
+  final Function(String)? onChanged;
 
-  final String? Function(String?) validate;
+  final String? Function(String?)? validate;
 
   const TextFormBorderRectangle({
     Key? key,
@@ -38,8 +41,11 @@ class TextFormBorderRectangle extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.autoFocus = false,
     this.maxLine,
+    this.maxLength,
     this.controller,
-    required this.validate,
+    this.titleAndFormSpace = 2,
+    this.validate,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -49,8 +55,8 @@ class TextFormBorderRectangle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildTitleText(),
-        const SizedBox(
-          height: 2,
+        SizedBox(
+          height: titleAndFormSpace,
         ),
         _buildTextForm(),
       ],
@@ -74,6 +80,7 @@ class TextFormBorderRectangle extends StatelessWidget {
       child: TextFormField(
         minLines: 1,
         maxLines: maxLine,
+        maxLength: maxLength,
         autofocus: autoFocus,
         controller: controller,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -84,6 +91,7 @@ class TextFormBorderRectangle extends StatelessWidget {
         keyboardType: inputType,
         decoration: InputDecoration(
           errorStyle: errorStyle,
+          counterText: '',
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
@@ -114,6 +122,7 @@ class TextFormBorderRectangle extends StatelessWidget {
           ),
         ),
         validator: validate,
+        onChanged: onChanged,
       ),
     );
   }
