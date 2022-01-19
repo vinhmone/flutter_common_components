@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppBarWithTextTitle extends AppBar {
-  final String titleText;
-  final TextStyle? textStyle;
-  final Widget? tailingWidget;
-  final Color? contentColor;
-  final bool? showBackButton;
-  final Color? background;
-  final double? appElevation;
-
   AppBarWithTextTitle({
     Key? key,
     this.tailingWidget,
@@ -20,6 +12,14 @@ class AppBarWithTextTitle extends AppBar {
     this.appElevation,
   }) : super(key: key);
 
+  final String titleText;
+  final TextStyle? textStyle;
+  final Widget? tailingWidget;
+  final Color? contentColor;
+  final bool? showBackButton;
+  final Color? background;
+  final double? appElevation;
+
   @override
   Color? get backgroundColor => background;
 
@@ -29,13 +29,6 @@ class AppBarWithTextTitle extends AppBar {
   @override
   double? get elevation => appElevation;
 
-  //
-  // @override
-  // Color? get shadowColor => Colors.transparent;
-  //
-  // @override
-  // Color? get foregroundColor => Colors.transparent;
-
   @override
   Widget? get flexibleSpace {
     Color? textColor = Colors.white;
@@ -44,23 +37,22 @@ class AppBarWithTextTitle extends AppBar {
     } else if (contentColor != null) {
       textColor = contentColor;
     }
-    final _textStyle = textStyle?.copyWith(color: textColor);
+    final TextStyle? _textStyle = textStyle?.copyWith(color: textColor);
     return SafeArea(
       child: Stack(
         children: [
           (showBackButton == true)
               ? Positioned(
-                  top: 0.0,
-                  left: 0.0,
-                  bottom: 0.0,
-                  child: BackButton(
-                    color: contentColor,
-                  ),
-                )
+            top: 0.0,
+            left: 0.0,
+            bottom: 0.0,
+            child: BackButton(
+              color: contentColor,
+            ),
+          )
               : Container(),
           Positioned.fill(
             child: Align(
-              alignment: Alignment.center,
               child: Text(
                 titleText,
                 textAlign: TextAlign.center,
@@ -71,9 +63,9 @@ class AppBarWithTextTitle extends AppBar {
           (tailingWidget == null)
               ? Container()
               : Align(
-                  alignment: Alignment.centerRight,
-                  child: tailingWidget!,
-                )
+            alignment: Alignment.centerRight,
+            child: tailingWidget!,
+          )
         ],
       ),
     );

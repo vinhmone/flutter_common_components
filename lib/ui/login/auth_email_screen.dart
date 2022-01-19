@@ -1,35 +1,37 @@
 import 'package:baxter_common/common/app_bar_with_text_title.dart';
 import 'package:baxter_common/common/button_rectangle.dart';
 import 'package:baxter_common/common/text_form_border_rectangle.dart';
-import 'package:baxter_common/ui/login/phone_number_code.dart';
 import 'package:baxter_common/util/util.dart';
 import 'package:flutter/material.dart';
 
-class InvitationCodeScreen extends StatefulWidget {
-  final String? phoneNumber;
-
-  const InvitationCodeScreen({
+class EmailCodeScreen extends StatefulWidget {
+  const EmailCodeScreen({
     Key? key,
-    this.phoneNumber,
   }) : super(key: key);
 
   @override
-  State<InvitationCodeScreen> createState() => _InvitationCodeScreenState();
+  State<EmailCodeScreen> createState() => _EmailCodeScreenState();
 }
 
-class _InvitationCodeScreenState extends State<InvitationCodeScreen> {
+class _EmailCodeScreenState extends State<EmailCodeScreen> {
   final TextEditingController controller = TextEditingController();
-  bool invitationCodeValid = true;
+  EmailValidate _emailCodeValid = EmailValidate.valid;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBarWithTextTitle(
-        showBackButton: true,
-        background: Colors.transparent,
-        contentColor: Colors.black,
-        appElevation: 0.0,
+      // appBar: AppBarWithTextTitle(
+      //   showBackButton: true,
+      //   background: Colors.transparent,
+      //   contentColor: Colors.black,
+      //   appElevation: 0.0,
+      // ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        shadowColor: Colors.transparent,
+        foregroundColor: Colors.transparent,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -64,38 +66,20 @@ class _InvitationCodeScreenState extends State<InvitationCodeScreen> {
 
   Widget _buildButtonVerify(BuildContext context) {
     return ButtonRectangle(
-      text: 'Verify',
-      onClick: (validateInvitationCode(controller.text))
-          ? () {
-              setState(() {
-                invitationCodeValid = true;
-              });
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => PhoneNumberCodeScreen(
-                      phoneNumber: widget.phoneNumber,
-                    ),
-                  ));
-            }
-          : () {
-              setState(() {
-                invitationCodeValid = false;
-              });
-            },
-    );
+        text: 'Confirm',
+        onClick: () {
+          setState(() {
+            _emailCodeValid = validateEmailCode(controller.text);
+          });
+        });
   }
 
   Widget _buildTextFormInvitationCode() {
     return TextFormBorderRectangle(
-      title: 'Enter your invitation code',
-      validate: (text) {
-        if (invitationCodeValid) {
-          return null;
-        } else {
-          return 'Incorrect invitation code';
-        }
-      },
+      title: 'An email address to prevent your account from being lost',
+      // validate: (text) {
+      //   return validateEmailFormat(text) ? null : 'Incorrect email address';
+      // },
       borderWidth: 0.5,
       titleAndFormSpace: 16.0,
       inputType: TextInputType.text,

@@ -1,7 +1,7 @@
 import 'package:baxter_common/common/app_bar_with_text_title.dart';
 import 'package:baxter_common/common/button_rectangle.dart';
 import 'package:baxter_common/common/text_form_border_rectangle.dart';
-import 'package:baxter_common/ui/login/email_code.dart';
+import 'package:baxter_common/ui/login/auth_email_screen.dart';
 import 'package:baxter_common/util/util.dart';
 import 'package:flutter/material.dart';
 
@@ -88,13 +88,13 @@ class _PhoneNumberCodeScreenState extends State<PhoneNumberCodeScreen> {
   Widget _buildTextFormInvitationCode() {
     return TextFormBorderRectangle(
       title: 'Enter the 6-digit code we sent to ${widget.phoneNumber}',
-      validate: (text) {
-        if (_phoneNumberCodeValid) {
-          return null;
-        } else {
-          return 'Incorrect code';
-        }
-      },
+      // validate: (text) {
+      //   if (_phoneNumberCodeValid) {
+      //     return null;
+      //   } else {
+      //     return 'Incorrect code';
+      //   }
+      // },
       borderWidth: 0.5,
       titleAndFormSpace: 16.0,
       inputType: TextInputType.text,

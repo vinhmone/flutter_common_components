@@ -1,6 +1,20 @@
+
+import 'package:baxter_common/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class ButtonRectangle extends StatelessWidget {
+  const ButtonRectangle({
+    Key? key,
+    this.text = kEmptyString,
+    this.fontSize = kDefaultFontSize,
+    this.textColor = Colors.white,
+    this.border = kDefaultBorderSize,
+    this.padding = kDefaultPadding,
+    this.elevation = kDefaultElevation,
+    this.backgroundColor = kPrimaryColor,
+    this.onClick,
+  }) : super(key: key);
+
   final String text;
   final double fontSize;
   final Color textColor;
@@ -9,18 +23,6 @@ class ButtonRectangle extends StatelessWidget {
   final double elevation;
   final Color backgroundColor;
   final Function()? onClick;
-
-  const ButtonRectangle({
-    Key? key,
-    this.text = '',
-    this.fontSize = 16.0,
-    this.textColor = Colors.white,
-    this.border = 10.0,
-    this.padding = 16.0,
-    this.elevation = 1.0,
-    this.backgroundColor = const Color(0xffA838FF),
-    this.onClick,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,8 @@ class ButtonRectangle extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(border),
         ),
+        color: backgroundColor,
+        elevation: elevation,
         child: Padding(
           padding: EdgeInsets.all(padding),
           child: Text(
@@ -43,8 +47,6 @@ class ButtonRectangle extends StatelessWidget {
             ),
           ),
         ),
-        color: backgroundColor,
-        elevation: elevation,
       ),
     );
   }

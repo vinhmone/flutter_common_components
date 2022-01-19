@@ -2,7 +2,7 @@ import 'package:baxter_common/common/app_bar_with_text_title.dart';
 import 'package:baxter_common/common/button_rectangle.dart';
 import 'package:baxter_common/common/button_text.dart';
 import 'package:baxter_common/common/text_form_border_rectangle.dart';
-import 'package:baxter_common/ui/login/invitation_code.dart';
+import 'package:baxter_common/ui/login/auth_invitation_screen.dart';
 import 'package:baxter_common/util/util.dart';
 import 'package:flutter/material.dart';
 
@@ -84,13 +84,13 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget _buildTextFormPhoneNumber() {
     return TextFormBorderRectangle(
       title: 'Enter your phone number',
-      validate: (text) {
-        if (validatePhoneNumber(text)) {
-          return null;
-        } else {
-          return 'Phone not valid!';
-        }
-      },
+      // validate: (text) {
+      //   if (validatePhoneNumber(text)) {
+      //     return null;
+      //   } else {
+      //     return 'Phone not valid!';
+      //   }
+      // },
       borderWidth: 0.5,
       titleAndFormSpace: 16.0,
       inputType: TextInputType.number,

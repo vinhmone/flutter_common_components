@@ -116,9 +116,6 @@ class MyApp extends StatelessWidget {
   Widget _buildTextFormBorderRectangle() {
     return TextFormBorderRectangle(
       title: 'Enter the 6-digit code we sent to 243-243',
-      validate: (text) {
-        return 'asd';
-      },
     );
   }
 

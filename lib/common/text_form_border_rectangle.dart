@@ -1,6 +1,35 @@
+
+import 'package:baxter_common/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class TextFormBorderRectangle extends StatelessWidget {
+  const TextFormBorderRectangle({
+    Key? key,
+    this.title = kEmptyString,
+    this.radius = kDefaultBorderSize,
+    this.borderWidth = kDefaultBorderWidth,
+    this.borderColor = kDefaultBorderColor,
+    this.errorBorderColor = kDefaultErrorBorderColor,
+    this.inputTextStyle = kInputTextStyle,
+    this.titleTextStyle = const TextStyle(
+      fontSize: 11.0,
+      color: kTextLightColor,
+    ),
+    this.errorStyle = const TextStyle(
+      fontSize: 11,
+      fontWeight: FontWeight.bold,
+    ),
+    this.inputType = TextInputType.text,
+    this.autoFocus = false,
+    this.maxLine,
+    this.maxLength,
+    this.controller,
+    this.titleAndFormSpace = 2,
+    this.errorText,
+    this.onChanged,
+    this.titleWidthFactor = 0.5,
+  }) : super(key: key);
+
   final String title;
   final double radius;
   final double borderWidth;
@@ -16,43 +45,12 @@ class TextFormBorderRectangle extends StatelessWidget {
   final TextEditingController? controller;
   final double? titleAndFormSpace;
   final Function(String)? onChanged;
-
-  final String? Function(String?)? validate;
-
-  const TextFormBorderRectangle({
-    Key? key,
-    this.title = '',
-    this.radius = 10.0,
-    this.borderWidth = 1.0,
-    this.borderColor = Colors.black,
-    this.errorBorderColor = Colors.red,
-    this.inputTextStyle = const TextStyle(
-      fontSize: 14.0,
-      color: Colors.black,
-    ),
-    this.titleTextStyle = const TextStyle(
-      fontSize: 11.0,
-      color: Color(0xFF697C8E),
-    ),
-    this.errorStyle = const TextStyle(
-      fontSize: 11,
-      fontWeight: FontWeight.bold,
-    ),
-    this.inputType = TextInputType.text,
-    this.autoFocus = false,
-    this.maxLine,
-    this.maxLength,
-    this.controller,
-    this.titleAndFormSpace = 2,
-    this.validate,
-    this.onChanged,
-  }) : super(key: key);
+  final String? errorText;
+  final double titleWidthFactor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildTitleText(),
         SizedBox(
@@ -65,7 +63,7 @@ class TextFormBorderRectangle extends StatelessWidget {
 
   Widget _buildTitleText() {
     return FractionallySizedBox(
-      widthFactor: 0.5,
+      widthFactor: titleWidthFactor,
       child: Text(
         title,
         textAlign: TextAlign.center,
@@ -83,15 +81,14 @@ class TextFormBorderRectangle extends StatelessWidget {
         maxLength: maxLength,
         autofocus: autoFocus,
         controller: controller,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         textAlignVertical: TextAlignVertical.center,
-        cursorColor: Colors.black,
-        cursorHeight: 20.0,
+        cursorColor: kDefaultCursorColor,
+        cursorHeight: kDefaultCursorHeight,
         style: inputTextStyle,
         keyboardType: inputType,
         decoration: InputDecoration(
           errorStyle: errorStyle,
-          counterText: '',
+          counterText: kEmptyString,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
@@ -120,8 +117,8 @@ class TextFormBorderRectangle extends StatelessWidget {
               width: borderWidth,
             ),
           ),
+          errorText: errorText,
         ),
-        validator: validate,
         onChanged: onChanged,
       ),
     );

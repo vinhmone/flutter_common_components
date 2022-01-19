@@ -8,7 +8,7 @@ class TextFormWithTitle extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextInputType textInputType;
   final bool autoFocus;
-  final int? maxLine;
+  final int maxLine;
   final TextEditingController? controller;
 
   const TextFormWithTitle({
@@ -23,7 +23,7 @@ class TextFormWithTitle extends StatelessWidget {
     this.hintStyle,
     this.textInputType = TextInputType.text,
     this.autoFocus = false,
-    this.maxLine,
+    this.maxLine = 1,
     this.controller,
   }) : super(key: key);
 
